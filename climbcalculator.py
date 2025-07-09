@@ -8,6 +8,12 @@ class TopOfClimbCalculator:
     def ingesttimefueldistancetable(self, filename):
         self.timefueldistancetable = pd.read_csv(filename)
 
+    def setfieldaltitude(self, altitude):
+        self.fieldalt = altitude
+
+    def setcruisealtitude(self, altitude):
+        self.cruisealtitude = altitude
+
 
 def test_topofclimbcalculator():
     practictoc = TopOfClimbCalculator()
