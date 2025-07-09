@@ -11,5 +11,5 @@ class TopOfClimbCalculator:
 
 def test_topofclimbcalculator():
     practictoc = TopOfClimbCalculator()
-    practictoc.ingesttimefueldistancetable('c172_climbtfdtable5-6')
+    practictoc.ingesttimefueldistancetable('c172_climbtfdtable5-6.csv')
     assert len(practictoc.timefueldistancetable) == 13
