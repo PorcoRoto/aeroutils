@@ -8,14 +8,33 @@ class TopOfClimbCalculator:
 
     def ingesttimefueldistancetable(self, filename):
         self.tfdtable = pd.read_csv(filename)
+        
+    def setfieldaltitude(self, altitude):
+        self.fieldaltitude = altitude
+        self.setfieldpressurealtitude()
+        
+    def setcruisealtitude(self, altitude):
+        self.cruisealtitude = altitude
+        self.setcruisepressurealtitude()
+    
+    def setbaro(self, baro):
+        self.baro = baro
 
-    def setfieldpressurealtitude(self, altitude):
-        self.fieldpressurealt = altitude
+    def setfieldpressurealtitude(self):
+        pa = self.calculatepafrombaro(self.fieldaltitude, self.baro)
+        self.fieldpressurealt = pa
+        print(f'field pressure altitude is {self.fieldpressurealt:.0f}')
         self.interpolatefieldaltvalues()
 
-    def setcruisepressurealtitude(self, altitude):
-        self.cruisepressurealt = altitude
+    def setcruisepressurealtitude(self):
+        pa = self.calculatepafrombaro(self.cruisealtitude, self.baro)
+        self.cruisepressurealt = pa
+        print(f'cruise pressure altitude is {self.cruisepressurealt:.0f}')
         self.interpolatecruisealtvalues()
+        
+    def calculatepafrombaro(self, altitude, baro):
+        pa = np.round(altitude + 145442.2 * (1 - (baro / 29.92126) ** .190261), 0)
+        return pa
 
     def calculateclimb(self):
         self.climbtime = np.round(self.cruisetime - self.fieldtime, 3)
@@ -91,18 +110,21 @@ def test_topofclimbcalculator():
     practicetoc = TopOfClimbCalculator()
     practicetoc.ingesttimefueldistancetable('c172_climbtfdtable5-6.csv')
     assert len(practicetoc.tfdtable) == 13
-    fieldpa = 5355
-    practicetoc.setfieldpressurealtitude(fieldpa)
-    assert practicetoc.fieldpressurealt == fieldpa
-    cruisepa = 8500
-    practicetoc.setcruisepressurealtitude(cruisepa)
+    baro = 30.10
+    practicetoc.setbaro(baro)
+    fieldalt = 5355
+    practicetoc.setfieldaltitude(fieldalt)
+    assert practicetoc.fieldpressurealt == 5190
+    cruisealt = 8500
+    practicetoc.setcruisealtitude(cruisealt)
+    assert practicetoc.cruisepressurealt == 8335
     practicetoc.calculateclimb()
-    assert practicetoc.fieldtime == 8.71
-    assert practicetoc.fieldfuel == 1.707
-    assert practicetoc.fielddistance == 10.71
-    assert practicetoc.cruisetime == 16.0
-    assert practicetoc.cruisefuel == 2.95
-    assert practicetoc.cruisedistance == 20.5
+    assert practicetoc.fieldtime == 8.38
+    assert practicetoc.fieldfuel == 1.657
+    assert practicetoc.fielddistance == 10.38
+    assert practicetoc.cruisetime == 15.67
+    assert practicetoc.cruisefuel == 2.868
+    assert practicetoc.cruisedistance == 20.005
     assert practicetoc.climbtime == 7.29
-    assert practicetoc.climbfuel == 1.24
-    assert practicetoc.climbdistance == 9.79
+    assert practicetoc.climbfuel == 1.21
+    assert practicetoc.climbdistance == 9.62
