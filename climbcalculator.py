@@ -3,11 +3,18 @@ import numpy as np
 
 
 class TopOfClimbCalculator:
-    def __init__(self):
+    def __init__(self, tfdfilename='c172_climbtfdtable5-6.csv'):
         self.tfdtable = pd.DataFrame
+        self.ingesttimefueldistancetable(tfdfilename)
 
     def ingesttimefueldistancetable(self, filename):
         self.tfdtable = pd.read_csv(filename)
+
+    def toccalc(self, fieldalt, cruisealt, baro):
+        self.setbaro(baro)
+        self.setfieldaltitude(fieldalt)
+        self.setcruisealtitude(cruisealt)
+        self.calculateclimb()
 
     def setfieldaltitude(self, altitude):
         self.fieldaltitude = altitude
@@ -109,23 +116,15 @@ class TopOfClimbCalculator:
 
 def test_topofclimbcalculator():
     practicetoc = TopOfClimbCalculator()
-    practicetoc.ingesttimefueldistancetable('c172_climbtfdtable5-6.csv')
+
     assert len(practicetoc.tfdtable) == 13
-    baro = 30.10
-    practicetoc.setbaro(baro)
-    fieldalt = 5355
-    practicetoc.setfieldaltitude(fieldalt)
-    assert practicetoc.fieldpressurealt == 5190
-    cruisealt = 8500
-    practicetoc.setcruisealtitude(cruisealt)
-    assert practicetoc.cruisepressurealt == 8335
-    practicetoc.calculateclimb()
-    assert practicetoc.fieldtime == 8.38
-    assert practicetoc.fieldfuel == 1.657
-    assert practicetoc.fielddistance == 10.38
-    assert practicetoc.cruisetime == 15.67
-    assert practicetoc.cruisefuel == 2.868
-    assert practicetoc.cruisedistance == 20.005
+    practicetoc.toccalc(5355, 8500, 30.09)
+    assert practicetoc.fieldtime == 8.398
+    assert practicetoc.fieldfuel == 1.66
+    assert practicetoc.fielddistance == 10.398
+    assert practicetoc.cruisetime == 15.688
+    assert practicetoc.cruisefuel == 2.872
+    assert practicetoc.cruisedistance == 20.032
     assert practicetoc.climbtime == 7.29
     assert practicetoc.climbfuel == 1.21
-    assert practicetoc.climbdistance == 9.62
+    assert practicetoc.climbdistance == 9.63
