@@ -8,15 +8,15 @@ class TopOfClimbCalculator:
 
     def ingesttimefueldistancetable(self, filename):
         self.tfdtable = pd.read_csv(filename)
-        
+
     def setfieldaltitude(self, altitude):
         self.fieldaltitude = altitude
         self.setfieldpressurealtitude()
-        
+
     def setcruisealtitude(self, altitude):
         self.cruisealtitude = altitude
         self.setcruisepressurealtitude()
-    
+
     def setbaro(self, baro):
         self.baro = baro
 
@@ -31,9 +31,10 @@ class TopOfClimbCalculator:
         self.cruisepressurealt = pa
         print(f'cruise pressure altitude is {self.cruisepressurealt:.0f}')
         self.interpolatecruisealtvalues()
-        
+
     def calculatepafrombaro(self, altitude, baro):
-        pa = np.round(altitude + 145442.2 * (1 - (baro / 29.92126) ** .190261), 0)
+        pa = np.round(altitude +
+                      145442.2 * (1 - (baro / 29.92126) ** .190261), 0)
         return pa
 
     def calculateclimb(self):
