@@ -23,3 +23,6 @@ def inHgtomb(pressureinHg):
 
 def test_unitconversions():
     assert np.round(FtoC(69), 2) == 20.56
+    assert np.round(CtoF(69), 2) == 156.2
+    assert np.round(CtoK(69), 2) == 342.15
+    assert np.round(inHgtomb(30.69), 2) == 1039.28
