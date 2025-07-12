@@ -1,2 +1,6 @@
-def calcdensityaltitude(airtemp, stationpressure, dewpoint):
-    pass
+import unitconversions as uc
+
+
+def calcdensityaltitude(airtempC, stationpressureinHg, dewpoint):
+    airtempK = uc.convertCtoK(airtempC)
+    return airtempK
