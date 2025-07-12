@@ -4,7 +4,7 @@ import unitconversions as uc
 def calcdensityaltitude(airtempC, dewpointC, altimetersetting, altitudeft):
     altitudemeters = uc.feettometers(altitudeft)
     airtempK = uc.CtoK(airtempC)
-    stationpressureinHg = stationpressure(altimetersetting, altitudemeters)
+    stationpressureinHg = stationpressurem(altimetersetting, altitudemeters)
     stationpressuremb = uc.inHgtomb(stationpressureinHg)
     e_vaporpressure = 6.11 * 10 ** ((7.5 * dewpointC) / (273.3 + dewpointC))
     TvK_virtualTemp = airtempK /\
@@ -16,7 +16,14 @@ def calcdensityaltitude(airtempC, dewpointC, altimetersetting, altitudeft):
     return densityaltitudeft
 
 
-def stationpressure(altimetersettinginHg, elevationmeters):
+def stationpressurem(altimetersettinginHg, elevationmeters):
+    stationpressureinHg = altimetersettinginHg *\
+        ((288 - 0.0065 * elevationmeters) / 288) ** 5.2561
+    return stationpressureinHg
+
+
+def stationpressureft(altimetersettinginHg, elevationfeet):
+    elevationmeters = uc.feettometers(elevationfeet)
     stationpressureinHg = altimetersettinginHg *\
         ((288 - 0.0065 * elevationmeters) / 288) ** 5.2561
     return stationpressureinHg
