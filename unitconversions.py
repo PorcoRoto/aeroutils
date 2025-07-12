@@ -21,6 +21,11 @@ def inHgtomb(pressureinHg):
     return pressuremb
 
 
+def mbtoinHg(pressuremb):
+    pressureinHg = .02953 * pressuremb
+    return pressureinHg
+
+
 def KtoR(tempK):
     tempR = ((9 / 5) * (tempK - 273.15) + 32) + 459.67
     return tempR
@@ -41,6 +46,7 @@ def test_unitconversions():
     assert np.round(CtoF(69), 2) == 156.2
     assert np.round(CtoK(69), 2) == 342.15
     assert np.round(inHgtomb(30.69), 2) == 1039.28
+    assert np.round(mbtoinHg(1069), 2) == 31.57
     assert np.round(KtoR(69), 2) == 124.2
     assert np.round(feettometers(69), 2) == 21.03
     assert np.round(meterstofeet(69), 2) == 226.38

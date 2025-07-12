@@ -16,7 +16,7 @@ def calcdensityaltitude(airtempC, dewpointC, altimetersetting, altitudeft):
     return densityaltitudeft
 
 
-def stationpressure(altimetersetting, altitudemeters):
-    stationpressure = altimetersetting *\
-        ((288 - 0.0065 * altitudemeters) / 288) ** 5.2561
-    return stationpressure
+def stationpressure(altimetersettinginHg, elevationmeters):
+    stationpressureinHg = altimetersettinginHg *\
+        ((288 - 0.0065 * elevationmeters) / 288) ** 5.2561
+    return stationpressureinHg
