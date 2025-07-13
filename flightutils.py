@@ -2,25 +2,23 @@ import unitconversions as uc
 import numpy as np
 
 
-def calcdensityaltitude(airtempC, dewpointC, altimetersetting, altitudeft):
+def densityaltcalculator(airtempC, dewpointC, altimetersetting, altitudeft):
     altitudemeters = uc.feettometers(altitudeft)
     airtempK = uc.CtoK(airtempC)
     stationpressureinHg, stationpressuremb = \
         calcstationpressurem(altimetersetting, altitudemeters)
     e_vaporpressuremb = calcvaporpressure(dewpointC)
-    print(f'vapor pressure is {e_vaporpressuremb} mb')
-    TvK_virtualTemp = airtempK /\
-        (1 - (e_vaporpressuremb / stationpressuremb) * (1 - .625))
-    TvR_virtualTemp = uc.KtoR(TvK_virtualTemp)
-    densityaltitudeft = 145366 *\
-        (1 - ((17.326 * stationpressureinHg) / TvR_virtualTemp) ** .235)
+    t_virtualtemperatureR = \
+        calcvirtualtemp(airtempK, e_vaporpressuremb, stationpressuremb)
+    densityaltitudeft, densityaltitudem = \
+        calcdensityaltitude(stationpressureinHg, t_virtualtemperatureR)
     densityaltitudem = uc.feettometers(densityaltitudeft)
-    print(f'da = {densityaltitudeft:.0f} ft ({densityaltitudem:.0f} m)')
     return densityaltitudeft
 
 
 def calcvaporpressure(dewpointC):
     e_mb = 6.1078 * np.exp((17.269 * dewpointC) / (237.15 + dewpointC))
+    print(f'vapor pressure is {e_mb:.1f} mb')
     return e_mb
 
 
@@ -32,6 +30,21 @@ def calcstationpressurem(altimetersettinginHg, elevationmeters):
     return p_inHg, p_mb
 
 
+def calcvirtualtemp(t_airtempK, e_vaporpressuremb, p_stationpressuremb):
+    t_virtualK = t_airtempK /\
+        (1 - (e_vaporpressuremb / p_stationpressuremb) * (1 - .625))
+    t_virtualR = uc.KtoR(t_virtualK)
+    print(f'virtual temperature is {t_virtualR:.1f} R ({t_airtempK:.1f} K)')
+    return t_virtualR
+
+
+def calcdensityaltitude(pressure_inHg, t_virtualR):
+    da_ft = 145366 * (1 - ((17.326 * pressure_inHg) / t_virtualR) ** .235)
+    da_m = uc.feettometers(da_ft)
+    print(f'da = {da_ft:.0f} ft ({da_m:.0f} m)')
+    return da_ft, da_m
+
+
 def stationpressureft(altimetersettinginHg, elevationfeet):
     elevationmeters = uc.feettometers(elevationfeet)
     stationpressureinHg = altimetersettinginHg *\
@@ -40,6 +53,6 @@ def stationpressureft(altimetersettinginHg, elevationfeet):
 
 
 def test_flightutils():
-    da = calcdensityaltitude(27, 12, 30.23, 5355)
+    da = densityaltcalculator(27, 12, 30.23, 5355)
     controlda = 7795.3
     assert np.abs(controlda - da) / controlda <= .01
