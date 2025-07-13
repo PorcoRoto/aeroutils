@@ -2,18 +2,29 @@ import unitconversions as uc
 import numpy as np
 
 
-def densityaltcalculator(airtempC, dewpointC, altimetersetting, altitudeft):
-    altitudemeters = uc.feettometers(altitudeft)
-    airtempK = uc.CtoK(airtempC)
-    stationpressureinHg, stationpressuremb = \
-        calcstationpressurem(altimetersetting, altitudemeters)
-    e_vaporpressuremb = calcvaporpressure(dewpointC)
-    t_virtualtemperatureR = \
-        calcvirtualtemp(airtempK, e_vaporpressuremb, stationpressuremb)
-    densityaltitudeft, densityaltitudem = \
-        calcdensityaltitude(stationpressureinHg, t_virtualtemperatureR)
-    densityaltitudem = uc.feettometers(densityaltitudeft)
-    return densityaltitudeft
+class densityaltcalculator:
+    def __init__(self, airtempC, dewpointC, altimetersetting, altitudeft):
+        self.setinputs(airtempC, dewpointC, altimetersetting, altitudeft)
+        self.docalcs()
+
+    def setinputs(self, airtempC, dewpointC, altimetersetting, altitudeft):
+        self.airtempC = airtempC
+        self.dewpointC = dewpointC
+        self.altimetersetting = altimetersetting
+        self.altitudeft = altitudeft
+        self.altitudemeters = uc.feettometers(self.altitudeft)
+        self.airtempK = uc.CtoK(self.airtempC)
+
+    def docalcs(self):
+        self.stationpressureinHg, self.stationpressuremb = \
+            calcstationpressurem(self.altimetersetting, self.altitudemeters)
+        self.e_vaporpressuremb = calcvaporpressure(self.dewpointC)
+        self.t_virtualtemperatureR = \
+            calcvirtualtemp(self.airtempK, self.e_vaporpressuremb,
+                            self.stationpressuremb)
+        self.densityaltitudeft, self.densityaltitudem = \
+            calcdensityaltitude(self.stationpressureinHg,
+                                self.t_virtualtemperatureR)
 
 
 def calcvaporpressure(dewpointC):
@@ -55,4 +66,4 @@ def stationpressureft(altimetersettinginHg, elevationfeet):
 def test_flightutils():
     da = densityaltcalculator(27, 12, 30.23, 5355)
     controlda = 7795.3
-    assert np.abs(controlda - da) / controlda <= .01
+    assert np.abs(controlda - da.densityaltitudeft) / controlda <= .01
