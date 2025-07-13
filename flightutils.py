@@ -18,7 +18,8 @@ class densityaltcalculator:
     def docalcs(self):
         self.stationpressureinHg, self.stationpressuremb = \
             calcstationpressurem(self.altimetersetting, self.altitudemeters)
-        self.e_vaporpressuremb = calcvaporpressure(self.dewpointC)
+        self.e_vaporpressuremb = \
+            calcvaporpressure(self.dewpointC)
         self.t_virtualtemperatureR = \
             calcvirtualtemp(self.airtempK, self.e_vaporpressuremb,
                             self.stationpressuremb)
@@ -27,18 +28,18 @@ class densityaltcalculator:
                                 self.t_virtualtemperatureR)
 
 
-def calcvaporpressure(dewpointC):
-    e_mb = 6.1078 * np.exp((17.269 * dewpointC) / (237.15 + dewpointC))
-    print(f'vapor pressure is {e_mb:.1f} mb')
-    return e_mb
-
-
 def calcstationpressurem(altimetersettinginHg, elevationmeters):
     p_inHg = altimetersettinginHg * \
         ((288 - 0.0065 * elevationmeters) / 288) ** 5.2561
     p_mb = uc.inHgtomb(p_inHg)
     print(f'stationpressure is {p_inHg:.1f} inHg ({p_mb:.1f} mb)')
     return p_inHg, p_mb
+
+
+def calcvaporpressure(dewpointC):
+    e_mb = 6.1078 * np.exp((17.269 * dewpointC) / (237.15 + dewpointC))
+    print(f'vapor pressure is {e_mb:.1f} mb')
+    return e_mb
 
 
 def calcvirtualtemp(t_airtempK, e_vaporpressuremb, p_stationpressuremb):
@@ -54,13 +55,6 @@ def calcdensityaltitude(pressure_inHg, t_virtualR):
     da_m = uc.feettometers(da_ft)
     print(f'da = {da_ft:.0f} ft ({da_m:.0f} m)')
     return da_ft, da_m
-
-
-def stationpressureft(altimetersettinginHg, elevationfeet):
-    elevationmeters = uc.feettometers(elevationfeet)
-    stationpressureinHg = altimetersettinginHg *\
-        ((288 - 0.0065 * elevationmeters) / 288) ** 5.2561
-    return stationpressureinHg
 
 
 def test_flightutils():
