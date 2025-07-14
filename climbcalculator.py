@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import flightutils as fu
 
 
 class TopOfClimbCalculator:
@@ -28,21 +29,21 @@ class TopOfClimbCalculator:
         self.baro = baro
 
     def setfieldpressurealtitude(self):
-        pa = self.calculatepafrombaro(self.fieldaltitude, self.baro)
+        pa = fu.calculatepafrombaro(self.fieldaltitude, self.baro)
         self.fieldpressurealt = pa
         print(f'field pressure altitude is {self.fieldpressurealt:.0f}')
         self.interpolatefieldaltvalues()
 
     def setcruisepressurealtitude(self):
-        pa = self.calculatepafrombaro(self.cruisealtitude, self.baro)
+        pa = fu.calculatepafrombaro(self.cruisealtitude, self.baro)
         self.cruisepressurealt = pa
         print(f'cruise pressure altitude is {self.cruisepressurealt:.0f}')
         self.interpolatecruisealtvalues()
 
-    def calculatepafrombaro(self, altitude, baro):
-        pa = np.round(altitude +
-                      145442.2 * (1 - (baro / 29.92126) ** .190261), 0)
-        return pa
+    # def calculatepafrombaro(self, altitude, baro):
+    #     pa = np.round(altitude +
+    #                   145442.2 * (1 - (baro / 29.92126) ** .190261), 0)
+    #     return pa
 
     def calculateclimb(self):
         self.climbtime = np.round(self.cruisetime - self.fieldtime, 3)

@@ -8,12 +8,15 @@ class densityaltcalculator:
         self.docalcs()
 
     def setinputs(self, airtempC, dewpointC, altimetersetting, altitudeft):
-        self.airtempC = airtempC
-        self.dewpointC = dewpointC
+        self.extracttryout(airtempC, dewpointC)
         self.altimetersetting = altimetersetting
         self.altitudeft = altitudeft
         self.altitudemeters = uc.feettometers(self.altitudeft)
         self.airtempK = uc.CtoK(self.airtempC)
+
+    def extracttryout(self, airtempC, dewpointC):
+        self.airtempC = airtempC
+        self.dewpointC = dewpointC
 
     def docalcs(self):
         self.stationpressureinHg, self.stationpressuremb = \
@@ -61,3 +64,9 @@ def test_flightutils():
     da = densityaltcalculator(27, 12, 30.23, 5355)
     controlda = 7795.3
     assert np.abs(controlda - da.densityaltitudeft) / controlda <= .01
+
+
+def calculatepafrombaro(altitude, baro):
+    pa = np.round(altitude +
+                  145442.2 * (1 - (baro / 29.92126) ** .190261), 0)
+    return pa
