@@ -56,11 +56,11 @@ class TopOfClimbCalculator:
                                                       self.fieldclimbspeed]),
                                           1)
         print(f'Climb values: \n'
-              f'Time: {self.climbtime} min\n'
-              f'Fuel: {self.climbfuel} gal\n'
-              f'Distance: {self.climbdistance} NM\n'
-              f'Max rate of climb is {self.climbmaxrate} at '
-              f'{self.climbmaxratespeed} KIAS')
+              f'Time: {self.climbtime:.1f} min\n'
+              f'Fuel: {self.climbfuel:.1f} gal\n'
+              f'Distance: {self.climbdistance:.1f} NM\n'
+              f'Max rate of climb is {self.climbmaxrate:.1f} at '
+              f'{self.climbmaxratespeed:.1f} KIAS')
 
     def interpolatefieldaltvalues(self):
         self.fieldtime = \
@@ -79,11 +79,11 @@ class TopOfClimbCalculator:
             np.round(self.interpolatefrompressurealt(self.fieldpressurealt,
                                                      'Climbspeed_KIAS'), 3)
         print(f'Field values: \n'
-              f'Time: {self.fieldtime} min\n'
-              f'Fuel: {self.fieldfuel} gal\n'
-              f'Distance: {self.fielddistance} NM\n'
-              f'Max rate of climb is {self.fieldclimbrate} at '
-              f'{self.fieldclimbspeed} KIAS')
+              f'Time: {self.fieldtime:.1f} min\n'
+              f'Fuel: {self.fieldfuel:.1f} gal\n'
+              f'Distance: {self.fielddistance:.1f} NM\n'
+              f'Max rate of climb is {self.fieldclimbrate:.1f} at '
+              f'{self.fieldclimbspeed:.1f} KIAS')
 
     def interpolatecruisealtvalues(self):
         self.cruisetime = \
@@ -102,11 +102,11 @@ class TopOfClimbCalculator:
             np.round(self.interpolatefrompressurealt(self.cruisepressurealt,
                                                      'Climbspeed_KIAS'), 3)
         print(f'Cruise values: \n'
-              f'Time: {self.cruisetime} min\n'
-              f'Fuel: {self.cruisefuel} gal\n'
-              f'Distance: {self.cruisedistance} NM\n'
-              f'Max rate of climb is {self.cruiseclimbrate} at '
-              f'{self.cruiseclimbspeed} KIAS')
+              f'Time: {self.cruisetime:.1f} min\n'
+              f'Fuel: {self.cruisefuel:.1f} gal\n'
+              f'Distance: {self.cruisedistance:.1f} NM\n'
+              f'Max rate of climb is {self.cruiseclimbrate:.1f} at '
+              f'{self.cruiseclimbspeed:.1f} KIAS')
 
     def interpolatefrompressurealt(self, altitude, tableparameter):
         interpolatedvalue = np.interp(altitude,
