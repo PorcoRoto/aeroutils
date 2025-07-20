@@ -1,0 +1,328 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Ubuntu, sans-serif;
+    overflow: hidden;
+}
+#menu {
+    position: absolute;
+    top: 15px;
+    left: 5px;
+    width: 571px;
+    height: 75px;
+    background-image: url(../header_75_1.png);
+    background-repeat: no-repeat;
+    background-size: 571px 75px;
+}
+#banner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 728px;
+    height: 90px;
+    overflow: hidden;
+}
+#chart {
+    position: absolute;
+    top: 93px;
+    bottom: 20px;
+    left: 3px;
+    right: 3px;
+}
+#teaser {
+    position: absolute;
+    top: 15px; 
+    left: 562px;
+    width: 125px;
+    height: 75px;
+    background-image: url(/images/drotam_75_half.png);
+    background-size: 125px 75px;
+}
+#headerimg1 {
+    position: absolute;
+    top: 15px;
+    left: 5px;
+    width: 571px;
+    height: 90px;
+}
+#headerimg2 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 457px;
+    height: 60px;
+    display: none;
+}
+#headerimg3 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 300px;
+    height: 60px;
+    display: none;
+}
+#headerimg4 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 180px;
+    height: 50px;
+    display: none;
+}
+#DrotamMenu {
+    border: 2px solid #4D7FA5;
+    position: absolute;
+    top: 93px;
+    left: 564px;
+    width: 250px;
+    visibility: hidden;
+    z-index: 140;
+    background-color: white;
+}
+div.drotambutton {
+    font-size: 16px;
+    width: 200px;
+}
+#DrotamDescr {
+    background-color: #EEE;
+    border-top: 1px solid #4D7FA5;
+    padding: 6px;
+    font-size: 13px;
+}
+#DrotamDescr h3 {
+    color: #4D7FA5;
+    margin: 2px 0 2px 0;
+}
+#DrotamDescr p {
+    margin: 4px 0;
+}
+#DrotamDescr a {
+    color: #4D7FA5;
+}
+#FuelSelector {
+    border: 2px solid #4D7FA5;
+    position: absolute;
+    top: 93px;
+    left: 484px;
+    width: 170px;
+    visibility: hidden;
+    z-index: 140;
+    background-color: white;
+}
+a.fuelSelectorLink {
+    text-decoration: none;
+    display: block;
+    color: #4D7FA5;
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+    padding: 1px 5px;
+    cursor: pointer;
+}
+a.fuelSelectorLink:hover {
+    text-decoration: none;
+    display: block;
+    color: white;
+    background-color: #4D7FA5;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    font-size: 13px;
+}
+#footer-left {
+    padding: 0 0 3px 5px;
+}
+#footer a{
+    margin: 0 4px;
+    color: #4D7FA5;
+}
+#footer-right {
+    position: absolute;
+    right: 6px;
+    bottom: 0px;
+
+}
+#copyright {
+    position: absolute;
+    bottom: 0px;
+}
+a.sociallink {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(/images/social.png);
+    background-size: 16px 48px;
+    margin: 0 4px;
+}
+#fuse-privacy-tool {
+    font-size: 0.5rem;
+}
+
+@media (min-width: 1290px) {
+    #ChartSelector {
+        top: 93px;
+    }
+}
+
+
+@media (min-resolution: 150dpi) {
+    #menu {
+        background-image: url(../header_75_2.png);
+    }
+    #teaser {
+        background-image: url(/images/drotam_75.png);
+    }
+}
+@media (max-width: 1414px) {
+    #teaser {
+        display: none;
+        top: 2px; 
+        left: 449px;
+        width: 100px;
+        height: 60px;
+        background-image: url(/images/drotams.png);
+        background-size: 100px 60px;
+    }
+}
+@media (max-width: 1414px) and (min-resolution: 150dpi) {
+    #teaser {
+        background-image: url(/images/drotams2.png);
+    }
+}
+@media (max-width: 1290px) {
+    #menu {
+        top: 2px;
+        left: 2px;
+        width: 457px;
+        height: 60px;
+        background-size: 457px 60px;
+    }
+    #banner {
+        width: 468px;
+        height: 60px;
+    }
+    #chart {
+        top: 63px;
+    }
+    #teaser {
+        display: block;
+    }
+    #headerimg1 {
+        display: none;
+    }
+    #headerimg2 {
+        display: block;
+    }
+    #headerimg3 {
+        display: none;
+    }
+    #headerimg4 {
+        display: none;
+    }
+    #FuelSelector {
+        top: 63px;
+        left: 380px;
+    }
+    #DrotamMenu {
+        top: 63px;
+        left: 450px;
+    }
+}
+@media (max-width: 1290px) and (min-resolution: 150dpi) {
+    #menu {
+        background-image: url(../newheaderhelp2.png);
+    }
+}
+@media (max-width: 1290px) and (max-resolution: 150dpi) {
+    #menu {
+        background-image: url(../newheaderhelp.png);
+    }
+}
+@media (max-width: 1015px) {
+    #teaser {
+        display: none;
+    }
+}
+@media (max-width: 920px) {
+    #menu {
+        width: 300px;
+        background-size: 300px 60px;
+    }
+    #headerimg1 {
+        display: none;
+    }
+    #headerimg2 {
+        display: none;
+    }
+    #headerimg3 {
+        display: block;
+    }
+    #headerimg4 {
+        display: none;
+    }
+    #FuelSelector {
+        left: 250px;
+    }
+    #ChartSelector {
+        left: 30px;
+    }
+}
+@media (max-width: 920px) and (min-resolution: 150dpi) {
+    #menu {
+        background-image: url(../headermedium2.png);
+    }
+}
+@media (max-width: 920px) and (max-resolution: 150dpi) {
+    #menu {
+        background-image: url(../headermedium.png);
+    }
+}
+@media (max-width: 767px) {
+    #menu {
+        width: 180px;
+        height: 50px;
+        background-size: 180px 50px;
+    }
+    #banner {
+        width: 320px;
+        height: 50px;
+    }
+    #chart {
+        top: 50px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+    #footer {
+        display: none;
+    }
+    #headerimg1 {
+        display: none;
+    }
+    #headerimg2 {
+        display: none;
+    }
+    #headerimg3 {
+        display: none;
+    }
+    #headerimg4 {
+        display: block;
+    }
+}
+@media (max-width: 767px) and (min-resolution: 150dpi) {
+    #menu {
+        background-image: url(../headersmall2.png);
+    }
+}
+@media (max-width: 767px) and (max-resolution: 150dpi) {
+    #menu {
+        background-image: url(../headersmall.png);
+    }
+}
+
+

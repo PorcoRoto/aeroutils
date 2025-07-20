@@ -1,0 +1,22 @@
+body {
+    width: 930px;
+    height: 1180px;
+}
+#chart {
+    left: 0px;
+    right: auto;
+    bottom: auto;
+    width: 930px;
+    height: 1097px;
+}
+#banner {
+    right: auto;
+    left: 460px;
+}
+#footer {
+    bottom: auto;
+    top: 1165px;
+    width: 930px;
+}
+
+

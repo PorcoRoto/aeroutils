@@ -1,0 +1,100 @@
+#ChartSelector {
+	border: 2px solid #4D7FA5;
+	height: 445px;
+    width: 700px;
+	position: absolute;
+	top: 63px;
+	left: 100px;
+	visibility: hidden;
+	z-index: 140;
+}
+#imgChartSelbase {
+    position: absolute; 
+    width: 700px;
+    height: 445px;
+    border: none;
+}
+#imgChartSelover {
+    position: absolute;     
+    margin-top: 25px;
+    width: 700px;
+    height: 420px;
+    border: none;
+}
+#imgChartSelHighlight {
+    position: absolute; 
+    margin-top: 25px; 
+    width: 700px; 
+    height: 420px;
+    border: none;
+}
+#divChartSelLabelBack {
+    position: absolute; 
+    margin-top: 36px;
+    margin-left: 203px;
+    width: 405px;
+    height: 24px;
+    background-color: black;
+    opacity: .4;
+    visibility: hidden;
+    filter: alpha(opacity=40);
+}
+#divChartSelLabel {
+    position: absolute; 
+    margin-top: 40px;
+    margin-left: 103px;
+    width: 605px;
+    height: 30px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    font-family: Verdana, sans-serif;
+}
+#imgChartSelMap {
+    position: absolute;
+    width: 700px;
+    margin-top: 25px;
+    height: 420px;
+    border: none;
+}
+#ChartSelector area {
+    cursor: crosshair;
+}
+#buttonmap area {
+    cursor: pointer;
+}
+#cs_bsel0 {
+    position: absolute;
+    margin: 11px 17px;
+    width: 591px;
+    height: 18px;
+    background: transparent url('/images/chartsel/buttons.gif') no-repeat scroll 0px -18px;
+}
+#cs_bsel1 {
+    position: absolute;
+    margin-left: 0px;
+    width: 92px;
+    height: 18px;
+    background: transparent url('/images/chartsel/buttons.gif') no-repeat scroll 0px -90px;
+}
+#cs_bsel2 {
+    position: absolute;
+    margin-left: 186px;
+    width: 70px;
+    height: 18px;
+    background: transparent url('/images/chartsel/buttons.gif') no-repeat scroll -186px -90px;
+}
+#cs_bhl {
+    position: absolute;
+    margin-left: 0px;
+    width: 0px;
+    height: 18px;
+    background: transparent url('/images/chartsel/buttons.gif') no-repeat scroll 0px 18px;
+}
+#cs_bselmap {
+    position: absolute; 
+    width: 591px;
+    height: 18px;
+    border: none;
+}
+
