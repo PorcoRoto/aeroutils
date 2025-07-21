@@ -13,6 +13,7 @@ class navlogshower:
             self.setinputsfromtest()
         self.calctopofclimb()
         self.generatepressurealttext()
+        self.generatetopofclimbtext
         self.generatenavlog()
 
     def setinputsfromtest(self):
@@ -35,9 +36,14 @@ class navlogshower:
         self.toc.toccalc(self.fieldalt, self.cruisealt, self.barosetting)
 
     def generatepressurealttext(self):
-        self.paline1 = f'PA: baro setting = {self.toc.baro:.2f}'
-        self.paline2 = f'Cruise: {self.toc.cruisealtitude} --> PA: {self.toc.cruisepressurealt:.0f}'
-        self.paline3 = f'Field:     {self.toc.fieldaltitude} --> PA: {self.toc.fieldpressurealt:.0f} '
+        self.paline1 = f'PA: baro setting = {self.toc.baro:.2f}"Hg'
+        self.paline2 = f'Cruise: {self.toc.cruisealtitude}\' --> PA: {self.toc.cruisepressurealt:.0f}\''
+        self.paline3 = f'Field:     {self.toc.fieldaltitude}\' --> PA: {self.toc.fieldpressurealt:.0f}\''
+        
+    def generatetopofclimbtext(self):
+        self.tocline1 = f'ToC:  time   fuel   dist '
+        self.tocline2 = f'    {self.toc.cruisetime:.1f}   {self.toc.cruisefuel:.1f}   {self.toc.cruisedistance:.1f}'
+        self.tocline3 = f'    {self.toc.fieldtime:.1f}   {self.toc.fieldfuel:.1f}   {self.toc.fielddistance:.1f}'
 
     def generatenavlog(self):
         plt.imshow(self.image)
@@ -54,7 +60,7 @@ class navlogshower:
         plt.text(pablockx, line1y, self.paline1, fontsize=13)
         plt.text(pablockx, line2y, self.paline2, fontsize=13)
         plt.text(pablockx, line3y, self.paline3, fontsize=13)
-        plt.plot([440, 440], [203, 317], color='black')
+        plt.plot([450, 450], [203, 317], color='black')
 
 
 class testinputs:
