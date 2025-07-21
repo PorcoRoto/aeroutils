@@ -40,11 +40,6 @@ class TopOfClimbCalculator:
         print(f'cruise pressure altitude is {self.cruisepressurealt:.0f}')
         self.interpolatecruisealtvalues()
 
-    # def calculatepafrombaro(self, altitude, baro):
-    #     pa = np.round(altitude +
-    #                   145442.2 * (1 - (baro / 29.92126) ** .190261), 0)
-    #     return pa
-
     def calculateclimb(self):
         self.climbtime = np.round(self.cruisetime - self.fieldtime, 3)
         self.climbfuel = np.round(self.cruisefuel - self.fieldfuel, 2)
