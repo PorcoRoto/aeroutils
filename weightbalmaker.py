@@ -4,8 +4,10 @@ import numpy as np
 class weightbalance:
     def __init__(self, inputs):
         self.inputs = inputs
-        self.emptylongmoment = self.calcmoment(self.inputs.basicemptyweight, self.inputs.emptylongarm)
-        self.emptylatmoment = self.calcmoment(self.inputs.basicemptyweight, self.inputs.emptylatarm)
+        self.emptylongmoment = self.calcmoment(self.inputs.basicemptyweight,
+                                               self.inputs.emptylongarm)
+        self.emptylatmoment = self.calcmoment(self.inputs.basicemptyweight,
+                                              self.inputs.emptylatarm)
         self.pilotlongmoment = self.calcmoment(
             (self.inputs.pilotwgt + self.inputs.pilotbags),
             self.inputs.pilotlongarm)
@@ -28,7 +30,6 @@ class inputreader:
         if self.airframe == 'R22':
             self.pilotlongarm = 78
             self.pilotlatarm = 10.7
-            
 
     def sortlines(self):
         for line in self.lines:
@@ -60,8 +61,6 @@ class inputreader:
 
     def collectlines(self):
         self.lines = self.file.readlines()
-
-        
 
 
 def test_weightbalance():
