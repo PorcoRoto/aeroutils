@@ -4,17 +4,32 @@ import numpy as np
 class weightbalance:
     def __init__(self, inputs):
         self.inputs = inputs
+        self.loadarmdata()
         self.emptylongmoment = self.calcmoment(self.inputs.basicemptyweight,
                                                self.inputs.emptylongarm)
         self.emptylatmoment = self.calcmoment(self.inputs.basicemptyweight,
                                               self.inputs.emptylatarm)
         self.pilotlongmoment = self.calcmoment(
             (self.inputs.pilotwgt + self.inputs.pilotbags),
-            self.inputs.pilotlongarm)
+            self.pilotlongarm)
         self.pilotlatmoment = self.calcmoment(
             (self.inputs.pilotwgt + self.inputs.pilotbags),
-            self.inputs.pilotlatarm)
+            self.pilotlatarm)
+        self.passengerlongmoment = self.calcmoment(
+            (self.inputs.passengerwgt + self.inputs.passengerbags),
+            self.passengerlongarm)
+        self.passengerlatmoment = self.calcmoment(
+            (self.inputs.passengerwgt + self.inputs.passengerbags),
+            self.passengerlatarm)
+        
 
+    def loadarmdata(self):
+        if self.inputs.airframe == 'R22':
+            self.pilotlongarm = 78
+            self.pilotlatarm = 10.7
+            self.passengerlongarm = 78
+            self.passengerlatarm = -9.3
+    
     def calcmoment(self, weight, arm):
         moment = np.round(weight * arm, 1)
         return moment
@@ -27,9 +42,9 @@ class inputreader:
         self.collectlines()
         self.sortlines()
         self.file.close()
-        if self.airframe == 'R22':
-            self.pilotlongarm = 78
-            self.pilotlatarm = 10.7
+        
+
+    
 
     def sortlines(self):
         for line in self.lines:
@@ -51,6 +66,10 @@ class inputreader:
             self.pilotwgt = float(value)
         elif key == 'pilot baggage':
             self.pilotbags = float(value)
+        elif key == 'passenger weight':
+            self.passengerwgt = float(value)
+        elif key == 'passenger baggage':
+            self.passengerbags = float(value)
 
     def getkeyandvaluefromline(self, line):
         if ':' in line:
@@ -72,3 +91,5 @@ def test_weightbalance():
     assert testwb.emptylatmoment == -17.5
     assert testwb.pilotlongmoment == 14976
     assert testwb.pilotlatmoment == 2054.4
+    assert testwb.passengerlongmoment == 14196
+    assert testwb.passengerlatmoment == -1692.6
