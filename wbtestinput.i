@@ -7,3 +7,5 @@ pilot weight : 190
 pilot baggage : 2
 passenger weight : 180
 passenger baggage : 2
+left door : on
+right door : off
