@@ -5,23 +5,31 @@ class weightbalance:
     def __init__(self, inputs):
         self.inputs = inputs
         self.loadarmdata()
-        self.emptylongmoment = self.calcmoment(self.inputs.basicemptyweight,
-                                               self.inputs.emptylongarm)
-        self.emptylatmoment = self.calcmoment(self.inputs.basicemptyweight,
-                                              self.inputs.emptylatarm)
-        self.pilotlongmoment = self.calcmoment(
-            (self.inputs.pilotwgt + self.inputs.pilotbags),
-            self.pilotlongarm)
-        self.pilotlatmoment = self.calcmoment(
-            (self.inputs.pilotwgt + self.inputs.pilotbags),
-            self.pilotlatarm)
+        self.setbasicemptymoments()
+        self.setpilotmoments()
+        self.setpassengermoments()
+
+    def setpassengermoments(self):
         self.passengerlongmoment = self.calcmoment(
             (self.inputs.passengerwgt + self.inputs.passengerbags),
             self.passengerlongarm)
         self.passengerlatmoment = self.calcmoment(
             (self.inputs.passengerwgt + self.inputs.passengerbags),
             self.passengerlatarm)
-        
+
+    def setpilotmoments(self):
+        self.pilotlongmoment = self.calcmoment(
+            (self.inputs.pilotwgt + self.inputs.pilotbags),
+            self.pilotlongarm)
+        self.pilotlatmoment = self.calcmoment(
+            (self.inputs.pilotwgt + self.inputs.pilotbags),
+            self.pilotlatarm)
+
+    def setbasicemptymoments(self):
+        self.emptylongmoment = self.calcmoment(self.inputs.basicemptyweight,
+                                               self.inputs.emptylongarm)
+        self.emptylatmoment = self.calcmoment(self.inputs.basicemptyweight,
+                                              self.inputs.emptylatarm)
 
     def loadarmdata(self):
         if self.inputs.airframe == 'R22':
@@ -29,7 +37,7 @@ class weightbalance:
             self.pilotlatarm = 10.7
             self.passengerlongarm = 78
             self.passengerlatarm = -9.3
-    
+
     def calcmoment(self, weight, arm):
         moment = np.round(weight * arm, 1)
         return moment
@@ -42,9 +50,6 @@ class inputreader:
         self.collectlines()
         self.sortlines()
         self.file.close()
-        
-
-    
 
     def sortlines(self):
         for line in self.lines:
