@@ -8,6 +8,9 @@ class weightbalance:
         self.setbasicemptymoments()
         self.setpilotmoments()
         self.setpassengermoments()
+        self.setdoormoments()
+
+    def setdoormoments(self):
         self.doorlongmoment = self.calcmoment(
             (self.inputs.leftdoor + self.inputs.rightdoor) * self.doorwgt,
             self.doorlongarm)
