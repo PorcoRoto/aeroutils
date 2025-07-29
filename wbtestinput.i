@@ -9,3 +9,5 @@ passenger weight : 180
 passenger baggage : 2
 left door : on
 right door : off
+main fuel : 10
+aux fuel : 6

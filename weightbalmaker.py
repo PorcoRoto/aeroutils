@@ -9,6 +9,12 @@ class weightbalance:
         self.setpilotmoments()
         self.setpassengermoments()
         self.setdoormoments()
+        self.zerofuelwgt = \
+            np.round(self.inputs.basicemptyweight +
+                     self.inputs.pilotwgt + self.inputs.pilotbags +
+                     self.inputs.passengerwgt + self.inputs.passengerbags +
+                     (self.inputs.leftdoor + self.inputs.rightdoor) *
+                     self.doorwgt, 1)
 
     def setdoormoments(self):
         self.doorlongmoment = self.calcmoment(
@@ -125,3 +131,4 @@ def test_weightbalance():
     assert testwb.passengerlatmoment == -1692.6
     assert testwb.doorlongmoment == -403
     assert testwb.doorlatmoment == -109.2
+    assert testwb.zerofuelwgt == 1244.4
