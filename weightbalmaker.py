@@ -9,6 +9,19 @@ class weightbalance:
         self.setpilotmoments()
         self.setpassengermoments()
         self.setdoormoments()
+        self.calczerofuelwgt()
+        self.calcfuelwgts()
+        self.calctotalwgt()
+
+    def calctotalwgt(self):
+        self.totalwgt = self.zerofuelwgt + self.mainfuelwgt + self.auxfuelwgt
+
+    def calcfuelwgts(self):
+        self.mainfuelwgt = self.inputs.mainfuelgal * 6
+        self.auxfuelwgt = self.inputs.auxfuelgal * 6
+        
+
+    def calczerofuelwgt(self):
         self.zerofuelwgt = \
             np.round(self.inputs.basicemptyweight +
                      self.inputs.pilotwgt + self.inputs.pilotbags +
@@ -95,6 +108,10 @@ class inputreader:
             self.passengerwgt = float(value)
         elif key == 'passenger baggage':
             self.passengerbags = float(value)
+        elif key == 'main fuel gal':
+            self.mainfuelgal = float(value)
+        elif key == 'aux fuel gal':
+            self.auxfuelgal = float(value)
         elif key == 'left door':
             # print(f'leftdoor value: {value}')
             if value == 'on':
@@ -132,3 +149,6 @@ def test_weightbalance():
     assert testwb.doorlongmoment == -403
     assert testwb.doorlatmoment == -109.2
     assert testwb.zerofuelwgt == 1244.4
+    assert testwb.mainfuelwgt == 60
+    assert testwb.auxfuelwgt == 36
+    assert testwb.totalwgt == 1340.4
