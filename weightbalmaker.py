@@ -23,22 +23,32 @@ class weightbalance:
                                           self.pilotlatmoment +
                                           self.passengerlatmoment +
                                           self.doorlatmoment)
-        self.zerofuellatarm = np.round(self.zerofuellatmoment / self.zerofuelwgt, 2)
-        self.totallatmoment = np.round(self.zerofuellatmoment + self.mainfuellatmoment + self.auxfuellatmoment, 1)
+        self.zerofuellatarm = np.round(self.zerofuellatmoment /
+                                       self.zerofuelwgt, 2)
+        self.totallatmoment = np.round(self.zerofuellatmoment +
+                                       self.mainfuellatmoment +
+                                       self.auxfuellatmoment, 1)
         self.totallatarm = np.round(self.totallatmoment / self.totalwgt, 2)
 
     def calctotallongarm(self):
-        self.totallongmoment = np.round(self.zerofuellongmoment + self.mainfuellongmoment + self.auxfuellongmoment, 1)
+        self.totallongmoment = np.round(self.zerofuellongmoment +
+                                        self.mainfuellongmoment +
+                                        self.auxfuellongmoment, 1)
         self.totallongarm = np.round(self.totallongmoment / self.totalwgt, 2)
 
     def calcfuelmoments(self):
-        self.mainfuellongmoment = self.calcmoment(self.mainfuelwgt, self.mainfuellongarm)
-        self.auxfuellongmoment = self.calcmoment(self.auxfuelwgt, self.auxfuellongarm)
-        self.mainfuellatmoment = self.calcmoment(self.mainfuelwgt, self.mainfuellatarm)
-        self.auxfuellatmoment = self.calcmoment(self.auxfuelwgt, self.auxfuellatarm)
+        self.mainfuellongmoment = self.calcmoment(self.mainfuelwgt,
+                                                  self.mainfuellongarm)
+        self.auxfuellongmoment = self.calcmoment(self.auxfuelwgt,
+                                                 self.auxfuellongarm)
+        self.mainfuellatmoment = self.calcmoment(self.mainfuelwgt,
+                                                 self.mainfuellatarm)
+        self.auxfuellatmoment = self.calcmoment(self.auxfuelwgt,
+                                                self.auxfuellatarm)
 
     def calczerofuellongarm(self):
-        self.zerofuellongarm = np.round(self.zerofuellongmoment / self.zerofuelwgt, 2)
+        self.zerofuellongarm = np.round(self.zerofuellongmoment /
+                                        self.zerofuelwgt, 2)
 
     def calczerofuellongmoment(self):
         self.zerofuellongmoment = self.emptylongmoment + self.pilotlongmoment \
