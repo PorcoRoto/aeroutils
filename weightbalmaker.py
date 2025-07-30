@@ -11,9 +11,19 @@ class weightbalance:
         self.setdoormoments()
         self.calczerofuelwgt()
         self.calcfuelwgts()
+        self.mainfuellongmoment = self.calcmoment(self.mainfuelwgt, self.mainfuellongarm)
+        self.auxfuellongmoment = self.calcmoment(self.auxfuelwgt, self.auxfuellongarm)
+        self.mainfuellatmoment = self.calcmoment(self.mainfuelwgt, self.mainfuellatarm)
+        self.auxfuellatmoment = self.calcmoment(self.auxfuelwgt, self.auxfuellatarm)
         self.calctotalwgt()
         self.calczerofuellongmoment()
         self.calczerofuellongarm()
+        self.totallongmoment = np.round(self.zerofuellongmoment + self.mainfuellongmoment + self.auxfuellongmoment, 1)
+        self.totallongarm = np.round(self.totallongmoment / self.totalwgt, 2)
+        self.zerofuellatmoment = np.round(self.emptylatmoment + self.pilotlatmoment + self.passengerlatmoment + self.doorlatmoment)
+        self.zerofuellatarm = np.round(self.zerofuellatmoment / self.zerofuelwgt, 2)
+        self.totallatmoment = np.round(self.zerofuellatmoment + self.mainfuellatmoment + self.auxfuellatmoment, 1)
+        self.totallatarm = np.round(self.totallatmoment / self.totalwgt, 2)
 
     def calczerofuellongarm(self):
         self.zerofuellongarm = np.round(self.zerofuellongmoment / self.zerofuelwgt, 2)
@@ -28,7 +38,6 @@ class weightbalance:
     def calcfuelwgts(self):
         self.mainfuelwgt = self.inputs.mainfuelgal * 6
         self.auxfuelwgt = self.inputs.auxfuelgal * 6
-        
 
     def calczerofuelwgt(self):
         self.zerofuelwgt = \
@@ -79,6 +88,10 @@ class weightbalance:
             self.doorwgt = 5.2
             self.doorlongarm = 77.5
             self.doorlatarm = 21.0
+            self.mainfuellongarm = 108.6
+            self.auxfuellongarm = 103.8
+            self.mainfuellatarm = -11.0
+            self.auxfuellatarm = 11.2
 
     def calcmoment(self, weight, arm):
         moment = np.round(weight * arm, 1)
@@ -159,7 +172,17 @@ def test_weightbalance():
     assert testwb.doorlatmoment == -109.2
     assert testwb.zerofuelwgt == 1244.4
     assert testwb.mainfuelwgt == 60
+    assert testwb.mainfuellongmoment == 6516.0
+    assert testwb.auxfuellongmoment == 3736.8
+    assert testwb.mainfuellatmoment == -660
+    assert testwb.auxfuellatmoment == 403.2
     assert testwb.auxfuelwgt == 36
     assert testwb.totalwgt == 1340.4
     assert testwb.zerofuellongmoment == 119717.6
     assert testwb.zerofuellongarm == 96.21
+    assert testwb.totallongmoment == 129970.4
+    assert testwb.totallongarm == 96.96
+    assert testwb.zerofuellatmoment == 235.0
+    assert testwb.zerofuellatarm == .19
+    assert testwb.totallatmoment == -21.8
+    assert testwb.totallatarm == -.02
