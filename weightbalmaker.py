@@ -12,6 +12,9 @@ class weightbalance:
         self.calczerofuelwgt()
         self.calcfuelwgts()
         self.calctotalwgt()
+        self.zerofuellongmoment = self.emptylongmoment + self.pilotlongmoment \
+            + self.passengerlongmoment + self.doorlongmoment
+        self.zerofuellongarm = np.round(self.zerofuellongmoment / self.zerofuelwgt, 2)
 
     def calctotalwgt(self):
         self.totalwgt = self.zerofuelwgt + self.mainfuelwgt + self.auxfuelwgt
@@ -152,3 +155,5 @@ def test_weightbalance():
     assert testwb.mainfuelwgt == 60
     assert testwb.auxfuelwgt == 36
     assert testwb.totalwgt == 1340.4
+    assert testwb.zerofuellongmoment == 119717.6
+    assert testwb.zerofuellongarm == 96.21
