@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import flightutils as fu
 from climbcalculator import TopOfClimbCalculator
 
 
@@ -37,8 +36,8 @@ class navlogshower:
 
     def generatepressurealttext(self):
         self.paline1 = f'PA: baro setting = {self.toc.baro:.2f}"Hg'
-        self.paline2 = f'Cruise: {self.toc.cruisealtitude}\' --> PA: {self.toc.cruisepressurealt:.0f}\''
-        self.paline3 = f'Field:     {self.toc.fieldaltitude}\' --> PA: {self.toc.fieldpressurealt:.0f}\''
+        self.paline2 = f'Cruise: {self.toc.cruisealtitude:.0f}\' --> PA: {self.toc.cruisepressurealt:.0f}\''
+        self.paline3 = f'Field:     {self.toc.fieldaltitude:.0f}\' --> PA: {self.toc.fieldpressurealt:.0f}\''
         
     def generatetopofclimbtext(self):
         self.tocline1 = f'ToC:  time   fuel   dist '
@@ -84,6 +83,7 @@ class testinputs:
         self.barosetting = 30.21
         self.fieldalt = 5355
         self.cruisealt = 10500
+
 
 def __main__():
     render = navlogshower()

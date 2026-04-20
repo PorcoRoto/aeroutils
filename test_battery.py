@@ -1,10 +1,10 @@
-import wbutils
+import flightutils
 from climbcalculator import TopOfClimbCalculator
 import unitconversions as uc
 import numpy as np
 
-def test_getpa():
-    pa = wbutils.getpa(30.09, 7258)
+def test_calcpa():
+    pa = flightutils.calcpa(30.09, 7258)
     assert int(pa) == 7088
 
 

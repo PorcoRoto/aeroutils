@@ -70,3 +70,8 @@ def calculatepafrombaro(altitude, baro):
     pa = np.round(altitude +
                   145442.2 * (1 - (baro / 29.92126) ** .190261), 0)
     return pa
+
+def calcpa(altsetting=30.09, fieldelev=5355):
+    pa = (29.92 - altsetting) * 1000 + fieldelev
+    print(f'PA = {pa:.0f}')
+    return pa
